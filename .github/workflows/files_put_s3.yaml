@@ -26,7 +26,7 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
-          role-to-assume: arn:aws:iam::288761748973:role/GitHubAction-AssumeRoleWithAction  # change to reflect your IAM role’s ARN
+          role-to-assume: arn:aws:iam::288761748973:role/github-oidc-role  # change to reflect your IAM role’s ARN
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
       - name: Sts GetCallerIdentity
@@ -35,25 +35,25 @@ jobs:
       - name: Put files to S3 bucket
         run: |
           aws s3 cp ./sample.txt s3://krupakaryasa
-      - name: EKS GetCluster
-        run: |
-          aws eks list-clusters
-          sleep 10
-      - name: Install and configure kubectl
-        run: |
-          VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
-          curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
-              --progress-bar \
-              --location \
-              --remote-name
-          chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/
-      - name: Configure Kubeconfig
-        uses: azure/k8s-set-context@v4
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-      - name: Create Kubernetes deployment
-        run: |
-          kubectl get pods
+      # - name: EKS GetCluster
+      #   run: |
+      #     aws eks list-clusters
+      #     sleep 10
+      # - name: Install and configure kubectl
+      #   run: |
+      #     VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+      #     curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
+      #         --progress-bar \
+      #         --location \
+      #         --remote-name
+      #     chmod +x kubectl
+      #     sudo mv kubectl /usr/local/bin/
+      # - name: Configure Kubeconfig
+      #   uses: azure/k8s-set-context@v4
+      #   with:
+      #     method: kubeconfig
+      #     kubeconfig: ${{ secrets.KUBECONFIG }}
+      # - name: Create Kubernetes deployment
+      #   run: |
+      #     kubectl get pods
           
