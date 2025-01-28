@@ -1,0 +1,4 @@
+terraform*
+.terraform*
+infra/*.terraform
+infra/terraform*
