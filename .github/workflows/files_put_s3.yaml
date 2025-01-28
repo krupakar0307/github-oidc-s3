@@ -40,11 +40,15 @@ jobs:
           aws eks list-clusters
           aws eks update-kubeconfig --name eks-demo --region ap-south-1
           sleep 10
-      - name: Get EKS nodes using kubectl
-        uses: docker://bitnami/kubectl:latest
-        with:
-          entrypoint: "/bin/bash"
-          args: "-c 'kubectl get nodes --kubeconfig=/home/runner/.kube/config'"
+      - name: Install and configure kubectl
+        run: |
+          VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+          curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
+              --progress-bar \
+              --location \
+              --remote-name
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
       - name: deploy to EKS
         run: |
           # cat /home/runner/.kube/config
