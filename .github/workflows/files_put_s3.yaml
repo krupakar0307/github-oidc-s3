@@ -40,19 +40,17 @@ jobs:
           aws eks list-clusters
           aws eks update-kubeconfig --name eks-demo --region ap-south-1
           sleep 10
-      - name: install kubeclt
-        run: |
-          curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
-          chmod +x ./kubectl
-          mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-          echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+      - name: Get EKS nodes using kubectl
+        uses: docker://bitnami/kubectl:latest
+        with:
+          entrypoint: "/bin/bash"
+          args: "-c 'kubectl get nodes --kubeconfig=/home/runner/.kube/config'"
       - name: deploy to EKS
         run: |
-          cat /home/runner/.kube/config
+          # cat /home/runner/.kube/config
           kubectl get nodes --kubeconfig /home/runner/.kube/config
           kubectl get pods
           kubectl create deploy nginx --image=nginx --repicas=2
           sleep 5
           k get pods
           sleep 5
-
