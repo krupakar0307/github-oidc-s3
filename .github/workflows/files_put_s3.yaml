@@ -51,8 +51,8 @@ jobs:
       - name: deploy to EKS
         run: |
          
-          echo "${{ secrets.KUBECONFIG }}" > /home/runner/.kube/config
-          cat /home/runner/.kube/config
+          echo "${{ secrets.KUBECONFIG }}" 
+          # cat /home/runner/.kube/config
           
           # kubectl get nodes 
           # kubectl get pods
