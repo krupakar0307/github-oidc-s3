@@ -49,16 +49,16 @@ jobs:
               --remote-name
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-          echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
-          cat kubeconfig.yaml
-      - name: deploy to EKS
-        run: |
-          cat kubeconfig.yaml
-          export KUBECONFIG=kubeconfig.yaml
-          cat ~/.kube/config
-          kubectl get nodes 
-          kubectl get pods
-          kubectl create deploy nginx-2 --image=nginx --replicas=2
-          kubectl delete deploy nginx
-          sleep 5
+          echo ${{ secrets.KUBECONFIG }} 
+      #     cat kubeconfig.yaml
+      # - name: deploy to EKS
+      #   run: |
+      #     cat kubeconfig.yaml
+      #     export KUBECONFIG=kubeconfig.yaml
+      #     cat ~/.kube/config
+      #     kubectl get nodes 
+      #     kubectl get pods
+      #     kubectl create deploy nginx-2 --image=nginx --replicas=2
+      #     kubectl delete deploy nginx
+      #     sleep 5
           
