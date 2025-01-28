@@ -50,6 +50,7 @@ jobs:
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
           echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
+          cat kubeconfig.yaml
       - name: deploy to EKS
         run: |
           cat kubeconfig.yaml
