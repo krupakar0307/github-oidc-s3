@@ -56,5 +56,4 @@ jobs:
           kubectl get pods
           kubectl create deploy nginx --image=nginx --replicas=2
           sleep 5
-          k get pods
-          sleep 5
+          
