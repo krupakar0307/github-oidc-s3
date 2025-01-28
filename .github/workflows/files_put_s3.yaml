@@ -7,7 +7,7 @@ on:
       - main
   pull_request:
     branches: 
-      - main
+      - mains
 
 env:
   AWS_REGION: "ap-south-1"  # Change to reflect your Region
