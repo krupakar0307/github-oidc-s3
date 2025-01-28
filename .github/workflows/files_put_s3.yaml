@@ -50,9 +50,9 @@ jobs:
           sudo mv kubectl /usr/local/bin/
       - name: deploy to EKS
         run: |
-          # cat /home/runner/.kube/config
-          echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
-          cat kubeconfig.yaml
+         
+          echo "${{ secrets.KUBECONFIG }}" > /home/runner/.kube/config
+          cat /home/runner/.kube/config
           
           # kubectl get nodes 
           # kubectl get pods
