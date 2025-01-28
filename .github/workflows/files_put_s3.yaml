@@ -35,11 +35,7 @@ jobs:
       - name: Put files to S3 bucket
         run: |
           aws s3 cp ./sample.txt s3://krupakaryasa
-      - name: EKS GetCluster
-        run: |
-          aws eks list-clusters
-          aws eks update-kubeconfig --name eks-demo --region ap-south-1
-          sleep 10
+
       - name: Install and configure kubectl
         run: |
           VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
