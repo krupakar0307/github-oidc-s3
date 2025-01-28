@@ -54,6 +54,7 @@ jobs:
           # cat /home/runner/.kube/config
           kubectl get nodes 
           kubectl get pods
-          kubectl create deploy nginx --image=nginx --replicas=2
+          kubectl create deploy nginx-2 --image=nginx --replicas=2
+          kubectl delete deploy nginx
           sleep 5
           
