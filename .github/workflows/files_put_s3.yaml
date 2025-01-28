@@ -38,7 +38,9 @@ jobs:
       - name: EKS GetCluster
         run: |
           aws eks list-clusters
-          aws eks update-kubeconfig --name eks-demo --region ap-south-1
+          echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
+          cat kubeconfig.yaml
+          
           sleep 10
       - name: Install and configure kubectl
         run: |
