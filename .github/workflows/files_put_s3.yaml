@@ -48,9 +48,11 @@ jobs:
               --remote-name
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-      - name: Set up KUBECONFIG
-        run: |
-          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+      - name: Configure Kubeconfig
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
       - name: Create Kubernetes deployment
         run: |
           kubectl get pods
