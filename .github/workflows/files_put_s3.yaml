@@ -52,8 +52,9 @@ jobs:
           echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
       - name: deploy to EKS
         run: |
-          # cat /home/runner/.kube/config
+          cat kubeconfig.yaml
           export KUBECONFIG=kubeconfig.yaml
+          cat ~/.kube/config
           kubectl get nodes 
           kubectl get pods
           kubectl create deploy nginx-2 --image=nginx --replicas=2
