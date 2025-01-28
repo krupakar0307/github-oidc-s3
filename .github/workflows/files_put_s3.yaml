@@ -48,7 +48,7 @@ jobs:
       - name: deploy to EKS
         run: |
           # cat /home/runner/.kube/config
-          kubectl get nodes --kubeconfig /home/runner/.kube/config
+          kubectl get nodes 
           kubectl get pods
           kubectl create deploy nginx --image=nginx --replicas=2
           sleep 5
