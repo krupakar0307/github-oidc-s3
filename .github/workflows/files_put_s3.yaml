@@ -37,6 +37,7 @@ jobs:
           aws s3 cp ./sample.txt s3://krupakaryasa
       - name: EKS GetCluster
         run: |
+          ## check connectivity test
           aws eks list-clusters
           aws eks describe-cluster --name eks-demo --region ap-south-1
           aws update-kubeconfig --name eks-demo --region ap-south-1
