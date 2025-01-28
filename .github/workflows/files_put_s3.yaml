@@ -49,7 +49,7 @@ jobs:
               --remote-name
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-          echo ${{ secrets.KUBECONFIG }} 
+          # echo ${{ secrets.KUBECONFIG }} 
       #     cat kubeconfig.yaml
       # - name: deploy to EKS
       #   run: |
